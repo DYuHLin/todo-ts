@@ -9,8 +9,18 @@ type todo = {
 
 let listItems: todo [] = []
 
-const AddListItem = (item: string) => {
+const AddListItem = () :string => {
     let writeVal: string = ((<HTMLInputElement>writerContainer)).value
-    let listItm: todo = {listed: item, done: false}
+    let listItm: todo = {listed: writeVal, done: false}
     listItems.push(listItm)
+    console.log(listItems)
+    return 'added'
+}
+
+const removeListItem = (id: number) => {
+    listItems.splice(id, 1)
+}
+
+const updateListItem = (id: number) => {
+    
 }
