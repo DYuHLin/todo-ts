@@ -10,15 +10,15 @@ type todo = {
 let listItems: todo [] = []
 
 const renderList = () => {
-    listItems.map((item, id) => {
-        if(listItems.length == 0){
-            listContainer.value = '<p>There are no todos</p>'
-        } else {
-            let listedItem = `<li>${item.listed}</li>`
-            listContainer.value = listedItem
-        }
+    let htmlTodo: string = ''
+    listItems.forEach((item, id) => {
+        let listedItem = `<li> <p>${item.listed}</p> <div class="button-group"> <button onclick="removeListItem(${id})">Delete</button><button>Update</button> </div> </li>`
+        htmlTodo+= listedItem
     })
+    listContainer.innerHTML = htmlTodo
 }
+
+renderList()
 
 const AddListItem = () :string => {
     let writeVal: string = ((<HTMLInputElement>writerContainer)).value
@@ -28,8 +28,16 @@ const AddListItem = () :string => {
     return 'added'
 }
 
+sendTodo?.addEventListener('click', (e: Event) => {
+    e.preventDefault()
+    AddListItem()
+    renderList()
+})
+
 const removeListItem = (id: number):string => {
     listItems.splice(id, 1)
+    console.log(listItems)
+    renderList()
     return 'deleted'
 }
 
