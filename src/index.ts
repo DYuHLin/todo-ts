@@ -12,7 +12,15 @@ let listItems: todo [] = []
 const renderList = () => {
     let htmlTodo: string = ''
     listItems.forEach((item, id) => {
-        let listedItem = `<li> <p>${item.listed}</p> <div class="button-group"> <button onclick="removeListItem(${id})">Delete</button><button>Update</button> </div> </li>`
+        let listedItem = `<li>
+            <form action="#" onsubmit="updateListItem(${id})"> 
+                <input type="text" readonly = true value=${item.listed} name="input-${id}"/> 
+            </form>
+            <div class="button-group"> 
+                <button onclick="removeListItem(${id})">Delete</button>
+                <button onclick="activateUpdate(${id})">Update</button> 
+            </div> 
+        </li>`
         htmlTodo+= listedItem
     })
     listContainer.innerHTML = htmlTodo
@@ -41,7 +49,17 @@ const removeListItem = (id: number):string => {
     return 'deleted'
 }
 
-const updateListItem = (id: number, note: string):string => {
-    listItems[id].listed = note
+const activateUpdate = (id: number):string => {
+    let inputVal:string | null = (<HTMLInputElement>document.getElementsByName(`input-${id}`)[0]).getAttribute('readonly')
+    console.log(inputVal)
+    return 'active'
+}
+
+const updateListItem = (e: Event, id: number):string => {
+    e.preventDefault()
+    let inputVal:string = (<HTMLInputElement>document.getElementsByName(`input-${id}`)[0]).value
+    console.log(inputVal)
+    listItems[id].listed = inputVal
+    renderList()
     return 'updated'
 }
