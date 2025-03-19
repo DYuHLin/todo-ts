@@ -13,12 +13,10 @@ const renderList = () => {
     let htmlTodo: string = ''
     listItems.forEach((item, id) => {
         let listedItem = `<li>
-            <form action="#" onsubmit="updateListItem(${id})"> 
-                <input type="text" readonly = true value=${item.listed} name="input-${id}"/> 
-            </form>
+            <input type="text" value=${item.listed} name="input-${id}"/> 
             <div class="button-group"> 
                 <button onclick="removeListItem(${id})">Delete</button>
-                <button onclick="activateUpdate(${id})">Update</button> 
+                <button onclick="updateListItem(${id})">Update</button> 
             </div> 
         </li>`
         htmlTodo+= listedItem
@@ -49,17 +47,10 @@ const removeListItem = (id: number):string => {
     return 'deleted'
 }
 
-const activateUpdate = (id: number):string => {
-    let inputVal:string | null = (<HTMLInputElement>document.getElementsByName(`input-${id}`)[0]).getAttribute('readonly')
-    console.log(inputVal)
-    return 'active'
-}
-
-const updateListItem = (e: Event, id: number):string => {
-    e.preventDefault()
+const updateListItem = (id: number):string => {
     let inputVal:string = (<HTMLInputElement>document.getElementsByName(`input-${id}`)[0]).value
-    console.log(inputVal)
     listItems[id].listed = inputVal
     renderList()
+    console.log(listItems)
     return 'updated'
 }
