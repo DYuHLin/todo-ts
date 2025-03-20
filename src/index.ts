@@ -12,11 +12,12 @@ let listItems: todo [] = []
 const renderList = () => {
     let htmlTodo: string = ''
     listItems.forEach((item, id) => {
-        let listedItem = `<li>
-            <input type="text" value=${item.listed} name="input-${id}"/> 
+        let listedItem = `<li class='list-item'>
+            <input type="text" value=${item.listed} name="input-${id}" id="listedItem${id}"/> 
             <div class="button-group"> 
                 <button onclick="removeListItem(${id})">Delete</button>
                 <button onclick="updateListItem(${id})">Update</button> 
+                <button onclick="completedTodo(${id})">Completed</button> 
             </div> 
         </li>`
         htmlTodo+= listedItem
@@ -53,4 +54,15 @@ const updateListItem = (id: number):string => {
     renderList()
     console.log(listItems)
     return 'updated'
+}
+
+const completedTodo = (id: number):string => {
+    if(listItems[id].done == false){
+        listItems[id].done = true;
+        (<HTMLInputElement>document.getElementById(`listedItem${id}`)).classList.add('completed')
+    } else {
+        listItems[id].done = false;
+        (<HTMLInputElement>document.getElementById(`listedItem${id}`)).classList.remove('completed')
+    }
+    return 'completed'
 }
