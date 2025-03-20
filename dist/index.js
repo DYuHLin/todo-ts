@@ -2,12 +2,12 @@
 const listContainer = document.getElementById('list');
 const writerContainer = document.getElementById('write');
 const sendTodo = document.getElementById('sendTodo');
-let listItems = [];
+let listItems = JSON.parse(localStorage.getItem('todos') || '[]');
 const renderList = () => {
     let htmlTodo = '';
     listItems.forEach((item, id) => {
         let listedItem = `<li class='list-item'>
-            <input type="text" value=${item.listed} name="input-${id}" id="listedItem${id}"/> 
+            <input type="text" value=${item.listed} name="input-${id}" id="listedItem${id}" class="${item.done == true ? 'completed' : ''}"/> 
             <div class="button-group"> 
                 <button onclick="removeListItem(${id})">Delete</button>
                 <button onclick="updateListItem(${id})">Update</button> 
@@ -24,6 +24,8 @@ const AddListItem = () => {
     let listItm = { listed: writeVal, done: false };
     listItems.push(listItm);
     console.log(listItems);
+    writerContainer.value = "";
+    localStorage.setItem('todos', JSON.stringify(listItems));
     return 'added';
 };
 sendTodo === null || sendTodo === void 0 ? void 0 : sendTodo.addEventListener('click', (e) => {
@@ -35,6 +37,7 @@ const removeListItem = (id) => {
     listItems.splice(id, 1);
     console.log(listItems);
     renderList();
+    localStorage.setItem('todos', JSON.stringify(listItems));
     return 'deleted';
 };
 const updateListItem = (id) => {
@@ -42,6 +45,7 @@ const updateListItem = (id) => {
     listItems[id].listed = inputVal;
     renderList();
     console.log(listItems);
+    localStorage.setItem('todos', JSON.stringify(listItems));
     return 'updated';
 };
 const completedTodo = (id) => {
@@ -53,5 +57,6 @@ const completedTodo = (id) => {
         listItems[id].done = false;
         document.getElementById(`listedItem${id}`).classList.remove('completed');
     }
+    localStorage.setItem('todos', JSON.stringify(listItems));
     return 'completed';
 };

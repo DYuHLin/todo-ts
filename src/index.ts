@@ -7,13 +7,13 @@ type todo = {
     done: boolean
 }
 
-let listItems: todo [] = []
+let listItems: todo [] = JSON.parse(localStorage.getItem('todos') || '[]')
 
 const renderList = () => {
     let htmlTodo: string = ''
     listItems.forEach((item, id) => {
         let listedItem = `<li class='list-item'>
-            <input type="text" value=${item.listed} name="input-${id}" id="listedItem${id}"/> 
+            <input type="text" value=${item.listed} name="input-${id}" id="listedItem${id}" class="${item.done == true ? 'completed' : ''}"/> 
             <div class="button-group"> 
                 <button onclick="removeListItem(${id})">Delete</button>
                 <button onclick="updateListItem(${id})">Update</button> 
@@ -31,7 +31,9 @@ const AddListItem = () :string => {
     let writeVal: string = ((<HTMLInputElement>writerContainer)).value
     let listItm: todo = {listed: writeVal, done: false}
     listItems.push(listItm)
-    console.log(listItems)
+    console.log(listItems);
+    ((<HTMLInputElement>writerContainer)).value = ""
+    localStorage.setItem('todos', JSON.stringify(listItems))
     return 'added'
 }
 
@@ -45,6 +47,7 @@ const removeListItem = (id: number):string => {
     listItems.splice(id, 1)
     console.log(listItems)
     renderList()
+    localStorage.setItem('todos', JSON.stringify(listItems))
     return 'deleted'
 }
 
@@ -53,6 +56,7 @@ const updateListItem = (id: number):string => {
     listItems[id].listed = inputVal
     renderList()
     console.log(listItems)
+    localStorage.setItem('todos', JSON.stringify(listItems))
     return 'updated'
 }
 
@@ -64,5 +68,6 @@ const completedTodo = (id: number):string => {
         listItems[id].done = false;
         (<HTMLInputElement>document.getElementById(`listedItem${id}`)).classList.remove('completed')
     }
+    localStorage.setItem('todos', JSON.stringify(listItems))
     return 'completed'
 }
