@@ -30,8 +30,7 @@ renderList()
 const AddListItem = () :string => {
     let writeVal: string = ((<HTMLInputElement>writerContainer)).value
     let listItm: todo = {listed: writeVal, done: false}
-    listItems.push(listItm)
-    console.log(listItems);
+    listItems.push(listItm);
     ((<HTMLInputElement>writerContainer)).value = ""
     localStorage.setItem('todos', JSON.stringify(listItems))
     return 'added'
@@ -45,7 +44,6 @@ sendTodo?.addEventListener('click', (e: Event) => {
 
 const removeListItem = (id: number):string => {
     listItems.splice(id, 1)
-    console.log(listItems)
     renderList()
     localStorage.setItem('todos', JSON.stringify(listItems))
     return 'deleted'
@@ -55,7 +53,6 @@ const updateListItem = (id: number):string => {
     let inputVal:string = (<HTMLInputElement>document.getElementsByName(`input-${id}`)[0]).value
     listItems[id].listed = inputVal
     renderList()
-    console.log(listItems)
     localStorage.setItem('todos', JSON.stringify(listItems))
     return 'updated'
 }

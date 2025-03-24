@@ -30,6 +30,7 @@ main{
     display: flex;
     flex-direction: column;
     padding: 40px;
+    border: 2px solid black;
 }
 
 .input-item{
@@ -71,6 +72,10 @@ button {
     background-color: rgb(99, 223, 99);
 }
 
+.listed{
+    margin-bottom: 15px;
+}
+
 .listed, .writer, ul, .list-item, .input-item, .button-group{
     background-color: rgb(219, 219, 110);
 }
@@ -87,6 +92,16 @@ button {
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    border: 2px solid black;
+}
+
+.send-btn{
+    padding: 10px;
+    background-color: rgb(128, 128, 224);
+}
+
+.send-btn:hover{
+    background-color: rgb(91, 91, 224);
 }
 
 ul{
