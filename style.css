@@ -37,7 +37,7 @@ main{
     font-size: 28px;
 }
 
-.input-item:focus{
+.input-item:focus, .todo-typer:focus{
     outline: none;
 }
 
@@ -47,9 +47,29 @@ button {
     cursor: pointer;
 }
 
-/* button:hover{
+.delete-btn{
+    background-color: rgb(231, 127, 127);
+}
 
-} */
+.delete-btn:hover{
+    background-color: rgb(235, 94, 94);
+}
+
+.update-btn{
+    background-color: rgb(128, 128, 224);
+}
+
+.update-btn:hover{
+    background-color: rgb(91, 91, 224);
+}
+
+.complete-btn{
+    background-color: rgb(139, 221, 139);
+}
+
+.complete-btn:hover{
+    background-color: rgb(99, 223, 99);
+}
 
 .listed, .writer, ul, .list-item, .input-item, .button-group{
     background-color: rgb(219, 219, 110);
@@ -59,8 +79,22 @@ button {
     width: 100%;
     display: flex;
     align-items: center;
+    gap: 20px;
+    margin-top: 40px;
 }
 
 .todo-typer{
     width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.title-page{
+    margin-bottom: 45px;
 }

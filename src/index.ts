@@ -15,9 +15,9 @@ const renderList = () => {
         let listedItem = `<li class='list-item'>
             <input type="text" value=${item.listed} name="input-${id}" id="listedItem${id}" class="input-item ${item.done == true ? 'completed' : ''}"/> 
             <div class="button-group"> 
-                <button onclick="removeListItem(${id})">Delete</button>
-                <button onclick="updateListItem(${id})">Update</button> 
-                <button onclick="completedTodo(${id})">Completed</button> 
+                <button class='delete-btn' onclick="removeListItem(${id})">Delete</button>
+                <button class='update-btn' onclick="updateListItem(${id})">Update</button> 
+                <button class='complete-btn' onclick="completedTodo(${id})">Completed</button> 
             </div> 
         </li>`
         htmlTodo+= listedItem
